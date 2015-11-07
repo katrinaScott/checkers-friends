@@ -1,5 +1,7 @@
+package src.Communications;
 
-import Interfaces.CheckersClient;
+import src.Communications.Interfaces.CheckersClient;
+import src.UI.MainFrame;
 
 public class Client implements CheckersClient {
 

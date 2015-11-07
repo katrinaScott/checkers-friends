@@ -1,8 +1,10 @@
+package src.Communications;
+
+import src.Communications.Interfaces.CheckersClient;
+import src.Communications.Interfaces.ServerInterface;
+
 import java.io.*;
 import java.net.*;
-
-import Interfaces.CheckersClient;
-import Interfaces.ServerInterface;
 
 /**
  * This class facilitates communication from the checkers client to the server.

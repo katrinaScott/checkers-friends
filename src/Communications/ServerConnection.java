@@ -1,7 +1,10 @@
-import java.io.*;
+package src.Communications;
 
-import Interfaces.TCPMsg;
-import Interfaces.TCPServerInterface;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import src.Communications.Interfaces.TCPMsg;
+import src.Communications.Interfaces.TCPServerInterface;
 
 /**
  * This class defines the connection from the client to the server. Method

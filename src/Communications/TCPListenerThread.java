@@ -1,9 +1,11 @@
+package src.Communications;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import Interfaces.CheckersClient;
-import Interfaces.TCPMsg;
+import src.Communications.Interfaces.CheckersClient;
+import src.Communications.Interfaces.TCPMsg;
 
 
 /**
