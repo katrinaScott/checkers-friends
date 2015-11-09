@@ -7,10 +7,10 @@ public class Client implements CheckersClient {
 
 	public static void main(String[] args) {
 		
-		// Initialize GUI
-		MainFrame frame = new MainFrame();
+		// initialize GUI
+		new MainFrame();
 		
-		//connect to server and process messages
+		// connect to server and process messages
 	}
 	
 	//confirmation that you have connected and your username is registered.

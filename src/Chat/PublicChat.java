@@ -12,12 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.rmi.RemoteException;
 import java.util.Hashtable;
 
 //import src.Communications.Interfaces.ServerInterface;
 
 public class PublicChat extends JPanel implements Chat {
+
+	private static final long serialVersionUID = 1L;
 	
 	JScrollPane scrollPane;
 	JTextArea chatArea;
@@ -30,6 +31,15 @@ public class PublicChat extends JPanel implements Chat {
 		
 		setLayout(new BorderLayout(0, 0));
 		
+		chatArea = new JTextArea();
+		chatArea.setLineWrap(true);
+		chatArea.setEditable(false);
+		
+		add(chatArea, BorderLayout.CENTER);
+		
+		JPanel inputPanel = new JPanel();
+		inputPanel.setLayout(new BorderLayout(0, 0));
+		
 		sendButton = new JButton(">");
 		sendButton.addActionListener(new ActionListener() {
 			@Override
@@ -38,10 +48,10 @@ public class PublicChat extends JPanel implements Chat {
 			}
 		});
 		
-		add(sendButton, BorderLayout.EAST);
+		inputPanel.add(sendButton, BorderLayout.EAST);
 		
 		input = new JTextField();
-		add(input, BorderLayout.SOUTH);
+		inputPanel.add(input, BorderLayout.CENTER);
 		input.setColumns(10);
 		input.addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent enter) {
@@ -50,11 +60,7 @@ public class PublicChat extends JPanel implements Chat {
 			}
 		});
 		
-		chatArea = new JTextArea();
-		chatArea.setLineWrap(true);
-		chatArea.setEditable(false);
-		
-		add(chatArea, BorderLayout.CENTER);
+		add(inputPanel, BorderLayout.SOUTH);
 		
 	}
 	
