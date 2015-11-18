@@ -71,6 +71,8 @@ public class LobbyPanel extends JPanel {
 		lobbyChat.setBackground(Color.DARK_GRAY);
 		chat.add(lobbyChat, "Public Chat");
 		add(chat, BorderLayout.EAST);
+		
+		setVisible(true);
 
 	} // end constructor
 	
