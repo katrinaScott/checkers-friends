@@ -60,7 +60,7 @@ public class MainFrame extends JFrame {
 				pause.stop();
 			}
 		};
-		pause = new Timer(5000, wait);
+		pause = new Timer(3000, wait);
 		pause.start();
 
 		setVisible(true);

@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -81,32 +80,44 @@ public class LoginPanel extends JPanel {
 		
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel loadingPanel = new JPanel();
-		loadingPanel.setBackground(Color.DARK_GRAY);
-		loadingPanel.setLayout(new BoxLayout(loadingPanel, BoxLayout.Y_AXIS));
-		loadingPanel.setAlignmentY(CENTER_ALIGNMENT);
-		
+		setBackground(Color.DARK_GRAY);
+		setLayout(new BorderLayout(0, 0));
+
 		ImageIcon loadingImg = new ImageIcon(getClass().getResource("/res/loading.gif"));
 		JLabel image = new JLabel();
 		image.setIcon(loadingImg);
 		image.setHorizontalAlignment(SwingConstants.CENTER);
-		loadingPanel.add(image);
-		
-		JLabel loading = new JLabel("Loading...");
+		image.setOpaque(false);
+		add(image, BorderLayout.NORTH);
+
+		JLabel loading = new JLabel("Logging in...");
 		loading.setHorizontalAlignment(SwingConstants.CENTER);
 		loading.setForeground(Color.WHITE);
 		loading.setFont(new Font("DejaVu Sans", Font.PLAIN, 40));
-		loadingPanel.add(loading);
-		
-		add(loadingPanel, BorderLayout.CENTER);
+		add(loading, BorderLayout.CENTER);
 
 		// refresh panel
 		revalidate();
 		
+		/*
+		 * THIS IS TEMPORARY!! THIS IS JUST SO YOU CAN SEE THE LOADING PAGE UNTIL WE ACTUALLY GET THE
+		 * BACK END SET UP
+		 */
+		
+		// pause for 3 seconds
+		ActionListener wait = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				success();
+				pause.stop();
+			}
+		};
+		pause = new Timer(3000, wait);
+		pause.start();
+		
 		// query server for username validity (should be its own method)
 		// this probably needs to get a message instead of being a boolean so we can tell them WHY its invalid
 		// TRUE until functionality implemented
-		Boolean loginAttempt = true;
+		/*Boolean loginAttempt = true;
 		
 		// if username is valid
 		if (loginAttempt) {
@@ -118,7 +129,11 @@ public class LoginPanel extends JPanel {
 		fail();
 		
 		} // end connectionOK if-else
+		*/
 		
+		/*
+		 * END OF TEMPORARY SHIT - WILL USE THE ABOVE IF-BLOCK STRUCTURE WHEN BACK END IMPLEMENTED
+		 */
 		
 	} // end method login
 	
@@ -148,7 +163,7 @@ public class LoginPanel extends JPanel {
 
 		// set username 
 
-		// pause for 5 seconds
+		// pause for 3 seconds
 		ActionListener wait = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// load lobby
@@ -158,7 +173,7 @@ public class LoginPanel extends JPanel {
 				pause.stop();
 			}
 		};
-		pause = new Timer(5000, wait);
+		pause = new Timer(3000, wait);
 		pause.start();
 				
 	} // end of method success

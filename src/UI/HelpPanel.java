@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
 
 public class HelpPanel extends JPanel {
 	
@@ -18,9 +19,10 @@ public class HelpPanel extends JPanel {
 	public HelpPanel() {
 		
 		setBackground(Color.DARK_GRAY);
+		setLayout(new BorderLayout(0, 0));
 		
 		// that's it- that's programming in a nutshell
-		JLabel lblHelp = new JLabel("HELP");
+		JLabel lblHelp = new JLabel(" HELP");
 		lblHelp.setHorizontalAlignment(SwingConstants.LEFT);
 		lblHelp.setVerticalAlignment(SwingConstants.TOP);
 		lblHelp.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
