@@ -25,10 +25,7 @@ public class LobbyPanel extends JPanel {
 	
 	public LobbyPanel() {
 		
-		System.out.println("FUCK");
-		
 		setBackground(Color.DARK_GRAY);
-		
 		setLayout(new BorderLayout(0, 0));
 		
 		JPanel tablePane = new JPanel();

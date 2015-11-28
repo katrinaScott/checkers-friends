@@ -1,20 +1,41 @@
 package src.Communications;
 
 import src.Communications.Interfaces.CheckersClient;
+import src.Communications.ServerCommunicator;
 import src.UI.MainFrame;
 
 public class Client implements CheckersClient {
-
+	
+	private static ServerCommunicator server;
+	private static MainFrame frame;
+	private static String ip = "";
+	private static String NAME_TAKEN = "NAME_TAKEN";
+	private static String INVALID_NAME = "INVALID_NAME";
+	
+	// I have no idea where the main method should go??? How do you make it start??
+	
 	public static void main(String[] args) {
 		
-		// initialize GUI
-		new MainFrame();
+		new Client();
+	}
+	
+	public Client() {
 		
-		// connect to server and process messages
+		server = new ServerCommunicator(this);
+		frame = new MainFrame();
+		
+	} // end of constructor
+	
+	public void login(String userName) {
+		
+		server.connectToServer(ip, userName);
+		
 	}
 	
 	//confirmation that you have connected and your username is registered.
 	public void connectionOK() {
+		
+		frame.loginSuccess();
 		
 	}
 	
@@ -147,10 +168,14 @@ public class Client implements CheckersClient {
 	//the username sent is already in use. This error disconnects you from the server.
 	public void nameInUseError() {
 		
+		frame.loginFail(NAME_TAKEN);
+		
 	}
 	
 	//the username sent is illegal...length = 0 or has whitespace.
 	public void nameIllegal() {
+		
+		frame.loginFail(INVALID_NAME);
 		
 	}
 	

@@ -20,6 +20,7 @@ import src.Table.Lobby;
 public class LoginPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	//private MainFrame frame;
 	private Timer pause;
 	
 	/*
@@ -27,6 +28,8 @@ public class LoginPanel extends JPanel {
 	 */
 	
 	public LoginPanel() {
+		
+		//this.frame = frame;
 		
 		setBackground(Color.DARK_GRAY);
 		SpringLayout springLayout = new SpringLayout();
@@ -60,20 +63,19 @@ public class LoginPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent send) {
 				String name = username.getText();
-				login(name);
+				loading();
+				//frame.login(name);
 			}
 		});
 		add(button);
 		
-		setVisible(true);
-
 	} // end constructor
 	
 	/*
 	 * 
 	 */
 	
-	private void login(String username) {
+	private void loading() {
 		
 		// clear panel
 		removeAll();
@@ -99,49 +101,13 @@ public class LoginPanel extends JPanel {
 		// refresh panel
 		revalidate();
 		
-		/*
-		 * THIS IS TEMPORARY!! THIS IS JUST SO YOU CAN SEE THE LOADING PAGE UNTIL WE ACTUALLY GET THE
-		 * BACK END SET UP
-		 */
-		
-		// pause for 3 seconds
-		ActionListener wait = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				success();
-				pause.stop();
-			}
-		};
-		pause = new Timer(3000, wait);
-		pause.start();
-		
-		// query server for username validity (should be its own method)
-		// this probably needs to get a message instead of being a boolean so we can tell them WHY its invalid
-		// TRUE until functionality implemented
-		/*Boolean loginAttempt = true;
-		
-		// if username is valid
-		if (loginAttempt) {
-			
-		success();
-
-		} else {
-		
-		fail();
-		
-		} // end connectionOK if-else
-		*/
-		
-		/*
-		 * END OF TEMPORARY SHIT - WILL USE THE ABOVE IF-BLOCK STRUCTURE WHEN BACK END IMPLEMENTED
-		 */
-		
-	} // end method login
+	} // end method loading
 	
 	/*
 	 * 
 	 */
 	
-	private void success() {
+	public void success() {
 		
 		// clear panel
 		removeAll();
@@ -160,21 +126,6 @@ public class LoginPanel extends JPanel {
 		add(success, BorderLayout.CENTER);
 
 		revalidate();
-
-		// set username 
-
-		// pause for 3 seconds
-		ActionListener wait = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// load lobby
-				Lobby lobby = new Lobby();
-				// I don't know where to add the lobby to and now I'm rethinking my entire design lmao
-				
-				pause.stop();
-			}
-		};
-		pause = new Timer(3000, wait);
-		pause.start();
 				
 	} // end of method success
 	
@@ -182,7 +133,7 @@ public class LoginPanel extends JPanel {
 	 * 
 	 */
 	
-	private void fail() {
+	public void fail(String failMsg) {
 		
 		// clear panel
 		removeAll();
@@ -194,24 +145,25 @@ public class LoginPanel extends JPanel {
 		x.setHorizontalAlignment(SwingConstants.CENTER);
 		add(x, BorderLayout.NORTH);
 
-		JLabel fail = new JLabel("Login failed");
+		JLabel fail = new JLabel();
+		
+		if (failMsg.equals("NAME_TAKEN")) {
+			
+			fail.setText("Name taken");
+			
+		
+		} else if (failMsg.equals("INVALID_NAME")) {
+			
+			fail.setText("Invalid name");
+			
+		} // end of if-else
+		
 		fail.setHorizontalAlignment(SwingConstants.CENTER);
 		fail.setForeground(Color.WHITE);
 		fail.setFont(new Font("DejaVu Sans", Font.PLAIN, 40));
 		add(fail, BorderLayout.CENTER);
 
 		revalidate();
-
-		// pause for 5 seconds
-		ActionListener wait = new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				// return to login page
-				// look into getTopLevelAncestor- there has to be some way call LoginPanel() from in here
-				pause.stop();
-			}
-		};
-		pause = new Timer(5000, wait);
-		pause.start();
 		
 	} // end of method fail
 

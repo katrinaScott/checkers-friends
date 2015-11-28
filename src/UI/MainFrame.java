@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -17,12 +18,16 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+import src.Table.Lobby;
+
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	private static final int WINDOW_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width - 150;
 	private static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height - 150;
 	private Timer pause;
+	private LoginPanel login;
+	private Lobby lobby;
 	
 	/*
 	 * 
@@ -41,44 +46,93 @@ public class MainFrame extends JFrame {
 		addWindowListener(new ConfirmExit());
 		setVisible(true);
 		
-		// initialize default panel
-		JPanel init = new JPanel();
-		init.setBackground(Color.DARK_GRAY);
-		init.setLayout(new BorderLayout());
+		// initialize title screen
+		JPanel title = new JPanel();
+		title.setBackground(Color.DARK_GRAY);
+		title.setLayout(new BorderLayout());
 		JLabel name = new JLabel("CHECKERS & FRIENDS");
 		name.setFont(new Font("DejaVu Sans", Font.BOLD, 100));
 		name.setForeground(Color.WHITE);
 		name.setHorizontalAlignment(SwingConstants.CENTER);
-		init.add(name, BorderLayout.CENTER);
-		add(init);
+		title.add(name, BorderLayout.CENTER);
+		add(title);
+		
+		// initialize login screen
+		login = new LoginPanel();
 		
 		// pause for 5 seconds
 		ActionListener wait = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				// load login panel
-				load();
+				remove(title);
+				add(login);
+				revalidate();
+				
 				pause.stop();
 			}
 		};
 		pause = new Timer(3000, wait);
 		pause.start();
 
-		setVisible(true);
-		
 	} // end constructor
 	
 	/*
 	 * 
 	 */
 	
-	private void load() {
+	//public void login(String userName) {
 		
-		JPanel login = new LoginPanel();
-		add(login);
-
-		revalidate();
+		//client.login(userName);
 		
-	} // end of method load
+	//} // end of method connect
+	
+	/*
+	 * 
+	 */
+	
+	public void loginSuccess() {
+		
+		login.success();
+		
+		// pause for 3 seconds
+		ActionListener wait = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// load lobby
+				lobby = new Lobby();
+				add(lobby.getLobbyPanel());
+				revalidate();
+				
+				pause.stop();
+			}
+		};
+		pause = new Timer(3000, wait);
+		pause.start();
+		
+	} // end of method loginSuccess
+	
+	/*
+	 * 
+	 */
+	
+	public void loginFail(String failMsg) {
+		
+		login.fail(failMsg);
+		
+		// pause for 5 seconds
+		ActionListener wait = new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// return to login page
+				login = new LoginPanel();
+				add(login);
+				revalidate();
+				
+				pause.stop();
+			}
+		};
+		pause = new Timer(5000, wait);
+		pause.start();
+		
+	} // end of method loginFail
 	
 	/*
 	 * 
