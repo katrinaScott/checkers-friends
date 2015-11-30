@@ -18,6 +18,7 @@ import javax.swing.SwingConstants;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+import src.Communications.ServerCommunicator;
 import src.Table.Lobby;
 
 public class MainFrame extends JFrame {
@@ -28,12 +29,18 @@ public class MainFrame extends JFrame {
 	private Timer pause;
 	private LoginPanel login;
 	private Lobby lobby;
+	private static String ip = "127.0.0.1";
+	
+	private ServerCommunicator server;
 	
 	/*
 	 * 
 	 */
 	
-	public MainFrame() {
+	public MainFrame(ServerCommunicator server, Lobby lobby) {
+		
+		this.server = server;
+		this.lobby = lobby;
 		
 		// set up frame
 		setFont(new Font("DejaVu Sans", Font.BOLD, 15));
@@ -75,16 +82,6 @@ public class MainFrame extends JFrame {
 		pause.start();
 
 	} // end constructor
-	
-	/*
-	 * 
-	 */
-	
-	//public void login(String userName) {
-		
-		//client.login(userName);
-		
-	//} // end of method connect
 	
 	/*
 	 * 

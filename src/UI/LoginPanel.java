@@ -20,16 +20,15 @@ import src.Table.Lobby;
 public class LoginPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	//private MainFrame frame;
 	private Timer pause;
+	private JTextField username;
+	private JButton button;
 	
 	/*
 	 * 
 	 */
 	
 	public LoginPanel() {
-		
-		//this.frame = frame;
 		
 		setBackground(Color.DARK_GRAY);
 		SpringLayout springLayout = new SpringLayout();
@@ -43,7 +42,7 @@ public class LoginPanel extends JPanel {
 		login.setFont(new Font("DejaVu Sans", Font.BOLD, 80));
 		add(login);
 		
-		JTextField username = new JTextField();
+		username = new JTextField();
 		springLayout.putConstraint(SpringLayout.WEST, username, 616, SpringLayout.WEST, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, username, -432, SpringLayout.SOUTH, this);
 		springLayout.putConstraint(SpringLayout.EAST, username, -616, SpringLayout.EAST, this);
@@ -52,21 +51,21 @@ public class LoginPanel extends JPanel {
 		add(username);
 		username.setColumns(10);
 		
-		JButton button = new JButton(">");
+		button = new JButton(">");
 		springLayout.putConstraint(SpringLayout.NORTH, button, 12, SpringLayout.SOUTH, username);
 		springLayout.putConstraint(SpringLayout.EAST, button, -616, SpringLayout.EAST, this);
 		springLayout.putConstraint(SpringLayout.SOUTH, login, -32, SpringLayout.NORTH, button);
 		button.setForeground(Color.WHITE);
 		button.setBackground(Color.GRAY);
 		button.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
-		button.addActionListener(new ActionListener() {
+		/*button.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent send) {
-				String name = username.getText();
+				//String name = username.getText();
 				loading();
-				//frame.login(name);
+				//setUsername(name);
 			}
-		});
+		});*/
 		add(button);
 		
 	} // end constructor
@@ -166,5 +165,10 @@ public class LoginPanel extends JPanel {
 		revalidate();
 		
 	} // end of method fail
+	
+	public String getUsername() {
+		
+		return username.getText();
+	}
 
 } // end class LoginPanel

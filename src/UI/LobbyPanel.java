@@ -1,6 +1,7 @@
 package src.UI;
 
 import src.Chat.*;
+import src.Table.*;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -11,6 +12,7 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Hashtable;
 
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -18,12 +20,15 @@ import javax.swing.BoxLayout;
 public class LobbyPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	private Hashtable<Integer, Table> tables;
 	
 	/*
 	 * 
 	 */
 	
-	public LobbyPanel() {
+	public LobbyPanel(Hashtable<Integer, Table> tables) {
+		
+		this.tables = tables;
 		
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
@@ -33,9 +38,11 @@ public class LobbyPanel extends JPanel {
 		
 		tablePane.setLayout(new BoxLayout(tablePane, BoxLayout.Y_AXIS));
 		// for each table in database
-		for (int i = 0; i < 10; i++) {
+		for(int i = 0; i < tables.size(); i++) {
+		//for (int i = 0; i < 10; i++) {
 			JPanel table = addTable(i+1);
 			tablePane.add(table);
+		//}
 		}
 		
 		JButton createTable = new JButton("Create Table");
@@ -123,6 +130,8 @@ public class LobbyPanel extends JPanel {
 	 */
 	
 	private void createNewTable() {
+		
+		//add table to db
 		
 	} // end method createNewTable
 	

@@ -1,34 +1,50 @@
 package src.Communications;
 
 import src.Communications.Interfaces.CheckersClient;
-import src.Communications.ServerCommunicator;
+import src.Table.Lobby;
 import src.UI.MainFrame;
 
-public class Client implements CheckersClient {
+import java.util.ArrayList;
+import java.util.Hashtable;
+
+import src.Chat.PrivateChat;
+import src.Chat.PublicChat;
+
+public class Client extends Thread implements CheckersClient {
 	
 	private static ServerCommunicator server;
 	private static MainFrame frame;
-	private static String ip = "";
+	private static Lobby lobby;
+	private static PublicChat chat;
+	private Hashtable<String, PrivateChat> privateChats;
 	private static String NAME_TAKEN = "NAME_TAKEN";
 	private static String INVALID_NAME = "INVALID_NAME";
 	
-	// I have no idea where the main method should go??? How do you make it start??
-	
 	public static void main(String[] args) {
 		
-		new Client();
+		// this is so ugly but it works for now
+		Client client = new Client();
+		client.start();
+		
 	}
-	
+
 	public Client() {
 		
 		server = new ServerCommunicator(this);
-		frame = new MainFrame();
+		chat = new PublicChat();
+		privateChats = new Hashtable<String, PrivateChat>();
 		
 	} // end of constructor
 	
-	public void login(String userName) {
+	@Override
+	public void run() {
+		frame = new MainFrame(server, lobby);
+		//login();
+	}
+	
+	public void login() {
 		
-		server.connectToServer(ip, userName);
+		//server.connectToServer(ip, clientName);
 		
 	}
 	
@@ -42,31 +58,56 @@ public class Client implements CheckersClient {
 	//notice that you are now in the game lobby.
 	public void youInLobby(){
 		
+		//lobby.add();
+		chat.appendServerMessage("you have joined the lobby");
+		
 	}
 	
 	//notice that you have left the lobby.
 	public void youLeftLobby(){
+		
+		//lobby.remove();
 		
 	}
 	
 	//notice that you received the message <msg> from user <user>. pm is true if it is a priv. message.
 	public void newMsg(String user, String msg, boolean pm) {
 		
+		if (pm) {
+			if(!privateChats.containsKey(user)) {
+				PrivateChat privateMsg = new PrivateChat();
+				privateChats.put(user, privateMsg);
+				privateMsg.appendUserMessage(user, msg);
+			} else {
+				PrivateChat existing = privateChats.get(user);
+				existing.appendUserMessage(user, msg);
+			}
+		} else {
+			chat.appendUserMessage(user, msg);
+		}
+		
 	}
 	
 	//information about who is in the lobby. users is an array of all usernames in the lobby.
 	public void usersInLobby(String[] users) {
+		
+		lobby.refresh(users);
 		
 	}
 	
 	//alert that <user> has joined the lobby.
 	public void nowJoinedLobby(String user) {
 		
+		lobby.add(user);
+		chat.appendServerMessage(user + " has joined the lobby");
+		
 	}
 	
 	//alert that <user> has left the lobby.
 	public void nowLeftLobby(String user){
 		
+		lobby.remove(user);
+		chat.appendServerMessage(user + " has left the lobby");
 	}
 	
 	//alert that a new table has been created with id tid.
