@@ -2,9 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package checkersgame;
+package src.Board;
 
-import static checkersgame.Squares.BackgroundColor.DARK;
+import static src.Board.Squares.BackgroundColor.DARK;
 import java.awt.Canvas;
 import java.awt.Color;
 import java.awt.Graphics;
