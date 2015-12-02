@@ -3,6 +3,7 @@ package src.Communications;
 import src.Communications.Interfaces.CheckersClient;
 import src.Table.Lobby;
 import src.UI.MainFrame;
+import src.UI.LoginPopup;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -18,6 +19,9 @@ public class Client extends Thread implements CheckersClient {
 	private static MainFrame frame;
 	private static Lobby lobby;
 	private static PublicChat chat;
+	private LoginPopup login;
+	private String clientName;
+	private String ip;
 	private Hashtable<String, PrivateChat> privateChats;
 	private static String NAME_TAKEN = "NAME_TAKEN";
 	private static String INVALID_NAME = "INVALID_NAME";
@@ -40,13 +44,19 @@ public class Client extends Thread implements CheckersClient {
 	
 	@Override
 	public void run() {
-		frame = new MainFrame(server, lobby);
-		//login();
+		
+		login = new LoginPopup();
+		//frame = new MainFrame(server, lobby);
+		login();
 	}
 	
 	public void login() {
 		
-		//server.connectToServer(ip, clientName);
+		ip = login.getIP();
+		clientName = login.getUsername();
+		// temp to make sure it's getting everything properly
+		System.out.println("Username: " + clientName + "\nIP: " + ip);
+		server.connectToServer(ip, clientName);
 		
 	}
 	
