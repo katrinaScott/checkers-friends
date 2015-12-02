@@ -27,10 +27,7 @@ public class MainFrame extends JFrame {
 	private static final int WINDOW_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width - 150;
 	private static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height - 150;
 	private Timer pause;
-	private LoginPanel login;
 	private Lobby lobby;
-	private static String ip = "127.0.0.1";
-	
 	private ServerCommunicator server;
 	
 	/*
@@ -145,6 +142,7 @@ public class MainFrame extends JFrame {
 					"", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
 			if (result == 0) {
+				//disconnect from server?
 				System.exit(0);
 			} // end if-close
 			

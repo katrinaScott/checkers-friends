@@ -51,11 +51,10 @@ public class Client extends Thread implements CheckersClient {
 		login = new LoginPopup();
 		ip = login.getIP();
 		clientName = login.getUsername();
-		// temp to make sure it's getting everything properly
-		System.out.println("Username: " + clientName + "\nIP: " + ip);
 		server.connectToServer(ip, clientName);
-		// also temp since it's not connecting properly- just call the method you want to test
-		connectionOK();
+
+		// temp to call the method you want to test (delete default IP upon login)
+		//connectionOK();
 		//nameIllegal();
 		//nameInUseError();
 		

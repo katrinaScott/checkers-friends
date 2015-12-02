@@ -15,6 +15,8 @@ public class LoginPopup extends JOptionPane {
 		
 		JTextField username = new JTextField(15);
 		JTextField ip = new JTextField(15);
+		// default IP for checkers server
+		ip.setText("130.108.28.165");
 		
 		JPanel loginPanel = new JPanel();
 		loginPanel.setLayout(new BoxLayout(loginPanel, BoxLayout.Y_AXIS));
