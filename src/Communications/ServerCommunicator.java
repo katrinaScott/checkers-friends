@@ -1,10 +1,11 @@
 package src.Communications;
 
-import src.Communications.Interfaces.CheckersClient;
-import src.Communications.Interfaces.ServerInterface;
 
 import java.io.*;
 import java.net.*;
+
+import src.Communications.Interfaces.CheckersClient;
+import src.Communications.Interfaces.ServerInterface;
 
 /**
  * This class facilitates communication from the checkers client to the server.
@@ -43,7 +44,7 @@ public class ServerCommunicator implements ServerInterface {
 	}
 
 	public boolean connectToServer(String ip, String userName) {
-		  try {
+		try {
 	      	socket = new Socket(ip, 45322);
 	        lnOut("Connected to server!");;
 	        streamFromServer = new DataInputStream(socket.getInputStream());
@@ -58,7 +59,8 @@ public class ServerCommunicator implements ServerInterface {
 				//finally send the requested user name to the server.
 				streamToServer.write(userName.getBytes());
 				return true;
-			} catch (UnknownHostException e) {
+			
+	        } catch (UnknownHostException e) {
 	            System.out.println("Don't know about host: "+ip);
 	            System.out.println(e.getMessage());
 	            return false;
@@ -70,7 +72,74 @@ public class ServerCommunicator implements ServerInterface {
 	        	System.out.println(e.getMessage());
 	        	return false;
 	        }
-	}
+        }
+
+        /**
+    @Override
+    public void sendMsg_All(String msg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
+    /**
+    @Override
+    public void sendMsg(String to, String msg) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
+    
+    /**
+    public void disconnect(boolean endProcess) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void makeTable(String user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void joinTable(String user, int tid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void playerReady(String user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void move(String user, int fr, int fc, int tr, int tc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void leaveTable(String user) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+/**
+    @Override
+    public void getTblStatus(String user, int tid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+*/
+        /**
+    @Override
+    public void observeTable(String user, int tid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void stopObserving(String user, int tid) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    * */
+	
 
 	public void killListenThread() throws IOException{
 		if(listener != null){
@@ -150,6 +219,12 @@ public class ServerCommunicator implements ServerInterface {
 		serverCon.observeTable(user, tid);
 	}
 
+    /**
+     *
+     * @param user
+     * @param tid
+     */
+    @Override
 	public void stopObserving(String user, int tid) {
 		serverCon.stopObserving(user, tid);
 

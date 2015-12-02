@@ -114,29 +114,42 @@ public class Client extends Thread implements CheckersClient {
 	
 	//alert that a new table has been created with id tid.
 	public void newTable(int tid) {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("The table \"Table " + tid + "\" has been created!");
+            
 	}
 	
 	//alert that you have joined the table with id tid.
 	public void joinedTable(int tid) {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("You have joined Table " + tid + "!");
+            
+            
 	}
 	
 	//alert that you have left your table.
 	public void alertLeftTable() {
 		
+            //Probably need more here
+            chat.appendServerMessage("You have left the table! Rage quit?");
+            
 	}
 	
 	//alert that at the table you are sitting at, a game is starting.
 	public void gameStart() {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("A game is starting at your table, get ready if you're playing!");
+            
 	}
 	
 	//alert that your color is Black, for the game.
 	public void colorBlack() {
 		
 		//set player as black?
-		chat.appendServerMessage("you are playing as black for the game");
+		chat.appendServerMessage("You are playing as black for the game.");
 		
 	}
 	
@@ -144,7 +157,7 @@ public class Client extends Thread implements CheckersClient {
 	public void colorRed() {
 		
 		//set player as red?
-		chat.appendServerMessage("you are playing as red for the game");
+		chat.appendServerMessage("You are playing as red for the game.");
 		
 	}
 	
