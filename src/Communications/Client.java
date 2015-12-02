@@ -23,8 +23,6 @@ public class Client extends Thread implements CheckersClient {
 	private String clientName;
 	private String ip;
 	private Hashtable<String, PrivateChat> privateChats;
-	private static String NAME_TAKEN = "NAME_TAKEN";
-	private static String INVALID_NAME = "INVALID_NAME";
 	
 	public static void main(String[] args) {
 		
@@ -45,26 +43,29 @@ public class Client extends Thread implements CheckersClient {
 	@Override
 	public void run() {
 		
-		login = new LoginPopup();
-		//frame = new MainFrame(server, lobby);
 		login();
 	}
 	
 	public void login() {
 		
+		login = new LoginPopup();
 		ip = login.getIP();
 		clientName = login.getUsername();
 		// temp to make sure it's getting everything properly
 		System.out.println("Username: " + clientName + "\nIP: " + ip);
 		server.connectToServer(ip, clientName);
+		// also temp since it's not connecting properly- just call the method you want to test
+		connectionOK();
+		//nameIllegal();
+		//nameInUseError();
 		
 	}
 	
 	//confirmation that you have connected and your username is registered.
 	public void connectionOK() {
 		
-		frame.loginSuccess();
-		
+		JOptionPane.showMessageDialog(null, "Login successful!");
+		frame = new MainFrame(server, lobby);
 	}
 	
 	//notice that you are now in the game lobby.
@@ -244,14 +245,16 @@ public class Client extends Thread implements CheckersClient {
 	//the username sent is already in use. This error disconnects you from the server.
 	public void nameInUseError() {
 		
-		frame.loginFail(NAME_TAKEN);
+		JOptionPane.showMessageDialog(null, "Name already taken- try again");
+		login();
 		
 	}
 	
 	//the username sent is illegal...length = 0 or has whitespace.
 	public void nameIllegal() {
 		
-		frame.loginFail(INVALID_NAME);
+		JOptionPane.showMessageDialog(null, "Invalid name- try again");
+		login();
 		
 	}
 	

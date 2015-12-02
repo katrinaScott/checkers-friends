@@ -51,7 +51,7 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new ConfirmExit());
-		setVisible(true);
+		//setVisible(true);
 		
 		// initialize title screen
 		JPanel title = new JPanel();
@@ -64,15 +64,19 @@ public class MainFrame extends JFrame {
 		title.add(name, BorderLayout.CENTER);
 		add(title);
 		
-		// initialize login screen
-		login = new LoginPanel();
+		setVisible(true);
+		
+		// NO MORE LOGIN SCREEN- GO STRAIGHT TO LOBBY
+		
+		lobby = new Lobby();
+		LobbyPanel lobbyPanel = lobby.getLobbyPanel();
 		
 		// pause for 5 seconds
 		ActionListener wait = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// load login panel
+				// load lobby panel
 				remove(title);
-				add(login);
+				add(lobbyPanel);
 				revalidate();
 				
 				pause.stop();
@@ -86,7 +90,7 @@ public class MainFrame extends JFrame {
 	/*
 	 * 
 	 */
-	
+	/*
 	public void loginSuccess() {
 		
 		login.success();
@@ -107,10 +111,6 @@ public class MainFrame extends JFrame {
 		
 	} // end of method loginSuccess
 	
-	/*
-	 * 
-	 */
-	
 	public void loginFail(String failMsg) {
 		
 		login.fail(failMsg);
@@ -130,6 +130,7 @@ public class MainFrame extends JFrame {
 		pause.start();
 		
 	} // end of method loginFail
+	*/
 	
 	/*
 	 * 
