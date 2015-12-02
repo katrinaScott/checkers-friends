@@ -7,6 +7,8 @@ import src.UI.MainFrame;
 import java.util.ArrayList;
 import java.util.Hashtable;
 
+import javax.swing.JOptionPane;
+
 import src.Chat.PrivateChat;
 import src.Chat.PublicChat;
 
@@ -133,10 +135,16 @@ public class Client extends Thread implements CheckersClient {
 	//alert that your color is Black, for the game.
 	public void colorBlack() {
 		
+		//set player as black?
+		chat.appendServerMessage("you are playing as black for the game");
+		
 	}
 	
 	//alert that your color is Red, for the game.
 	public void colorRed() {
+		
+		//set player as red?
+		chat.appendServerMessage("you are playing as red for the game");
 		
 	}
 	
@@ -163,10 +171,14 @@ public class Client extends Thread implements CheckersClient {
 	//notice that for the game you are playing, you win!
 	public void youWin() {
 		
+		JOptionPane.showMessageDialog(null, "CONGRATULATIONS!\n" + "You have won!");
+		
 	}
 	
 	//notice that for the game you are playing, you lost.
 	public void youLose() {
+		
+		JOptionPane.showMessageDialog(null, "SORRY :/" + "\n" + "You have lost.");
 		
 	}
 	
@@ -222,6 +234,8 @@ public class Client extends Thread implements CheckersClient {
 	
 	//the requested move is illegal.
 	public void illegalMove() {
+		
+		//printMessageToClient("the move you tried to make is not valid");
 		
 	}
 	
