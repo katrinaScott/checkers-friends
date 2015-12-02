@@ -27,10 +27,7 @@ public class MainFrame extends JFrame {
 	private static final int WINDOW_WIDTH = Toolkit.getDefaultToolkit().getScreenSize().width - 150;
 	private static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height - 150;
 	private Timer pause;
-	private LoginPanel login;
 	private Lobby lobby;
-	private static String ip = "127.0.0.1";
-	
 	private ServerCommunicator server;
 	
 	/*
@@ -51,7 +48,7 @@ public class MainFrame extends JFrame {
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new ConfirmExit());
-		setVisible(true);
+		//setVisible(true);
 		
 		// initialize title screen
 		JPanel title = new JPanel();
@@ -64,15 +61,19 @@ public class MainFrame extends JFrame {
 		title.add(name, BorderLayout.CENTER);
 		add(title);
 		
-		// initialize login screen
-		login = new LoginPanel();
+		setVisible(true);
+		
+		// NO MORE LOGIN SCREEN- GO STRAIGHT TO LOBBY
+		
+		lobby = new Lobby();
+		LobbyPanel lobbyPanel = lobby.getLobbyPanel();
 		
 		// pause for 5 seconds
 		ActionListener wait = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				// load login panel
+				// load lobby panel
 				remove(title);
-				add(login);
+				add(lobbyPanel);
 				revalidate();
 				
 				pause.stop();
@@ -86,7 +87,7 @@ public class MainFrame extends JFrame {
 	/*
 	 * 
 	 */
-	
+	/*
 	public void loginSuccess() {
 		
 		login.success();
@@ -107,10 +108,6 @@ public class MainFrame extends JFrame {
 		
 	} // end of method loginSuccess
 	
-	/*
-	 * 
-	 */
-	
 	public void loginFail(String failMsg) {
 		
 		login.fail(failMsg);
@@ -130,6 +127,7 @@ public class MainFrame extends JFrame {
 		pause.start();
 		
 	} // end of method loginFail
+	*/
 	
 	/*
 	 * 
@@ -144,6 +142,7 @@ public class MainFrame extends JFrame {
 					"", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 			
 			if (result == 0) {
+				//disconnect from server?
 				System.exit(0);
 			} // end if-close
 			

@@ -3,6 +3,7 @@ package src.Communications;
 import src.Communications.Interfaces.CheckersClient;
 import src.Table.Lobby;
 import src.UI.MainFrame;
+import src.UI.LoginPopup;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
@@ -18,9 +19,10 @@ public class Client extends Thread implements CheckersClient {
 	private static MainFrame frame;
 	private static Lobby lobby;
 	private static PublicChat chat;
+	private LoginPopup login;
+	private String clientName;
+	private String ip;
 	private Hashtable<String, PrivateChat> privateChats;
-	private static String NAME_TAKEN = "NAME_TAKEN";
-	private static String INVALID_NAME = "INVALID_NAME";
 	
 	public static void main(String[] args) {
 		
@@ -40,21 +42,29 @@ public class Client extends Thread implements CheckersClient {
 	
 	@Override
 	public void run() {
-		frame = new MainFrame(server, lobby);
-		//login();
+		
+		login();
 	}
 	
 	public void login() {
 		
-		//server.connectToServer(ip, clientName);
+		login = new LoginPopup();
+		ip = login.getIP();
+		clientName = login.getUsername();
+		server.connectToServer(ip, clientName);
+
+		// temp to call the method you want to test (delete default IP upon login)
+		//connectionOK();
+		//nameIllegal();
+		//nameInUseError();
 		
 	}
 	
 	//confirmation that you have connected and your username is registered.
 	public void connectionOK() {
 		
-		frame.loginSuccess();
-		
+		JOptionPane.showMessageDialog(null, "Login successful!");
+		frame = new MainFrame(server, lobby);
 	}
 	
 	//notice that you are now in the game lobby.
@@ -114,29 +124,42 @@ public class Client extends Thread implements CheckersClient {
 	
 	//alert that a new table has been created with id tid.
 	public void newTable(int tid) {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("The table \"Table " + tid + "\" has been created!");
+            
 	}
 	
 	//alert that you have joined the table with id tid.
 	public void joinedTable(int tid) {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("You have joined Table " + tid + "!");
+            
+            
 	}
 	
 	//alert that you have left your table.
 	public void alertLeftTable() {
 		
+            //Probably need more here
+            chat.appendServerMessage("You have left the table! Rage quit?");
+            
 	}
 	
 	//alert that at the table you are sitting at, a game is starting.
 	public void gameStart() {
-		
+	
+            //Probably need more here
+            chat.appendServerMessage("A game is starting at your table, get ready if you're playing!");
+            
 	}
 	
 	//alert that your color is Black, for the game.
 	public void colorBlack() {
 		
 		//set player as black?
-		chat.appendServerMessage("you are playing as black for the game");
+		chat.appendServerMessage("You are playing as black for the game.");
 		
 	}
 	
@@ -144,7 +167,7 @@ public class Client extends Thread implements CheckersClient {
 	public void colorRed() {
 		
 		//set player as red?
-		chat.appendServerMessage("you are playing as red for the game");
+		chat.appendServerMessage("You are playing as red for the game.");
 		
 	}
 	
@@ -221,14 +244,16 @@ public class Client extends Thread implements CheckersClient {
 	//the username sent is already in use. This error disconnects you from the server.
 	public void nameInUseError() {
 		
-		frame.loginFail(NAME_TAKEN);
+		JOptionPane.showMessageDialog(null, "Name already taken- try again");
+		login();
 		
 	}
 	
 	//the username sent is illegal...length = 0 or has whitespace.
 	public void nameIllegal() {
 		
-		frame.loginFail(INVALID_NAME);
+		JOptionPane.showMessageDialog(null, "Invalid name- try again");
+		login();
 		
 	}
 	

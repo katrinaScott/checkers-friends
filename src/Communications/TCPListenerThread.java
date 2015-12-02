@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import src.Communications.Interfaces.CheckersClient;
 import src.Communications.Interfaces.TCPMsg;
 
-
 /**
  * This class represents a thread that listens for TCP messages from the game
  * server. It decodes messages received by the client and the invokes an appropriate
