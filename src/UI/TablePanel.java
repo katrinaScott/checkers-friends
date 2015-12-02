@@ -1,5 +1,7 @@
 package src.UI;
 
+import src.Table.Table;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
@@ -22,8 +24,8 @@ public class TablePanel extends JPanel {
 	 * 
 	 */
 	
-	public TablePanel() {
-		
+	public TablePanel(Table backend) {
+		Table this.backend = backend;
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
@@ -109,6 +111,6 @@ public class TablePanel extends JPanel {
 		lobbyChat.setBackground(Color.DARK_GRAY);
 		chat.add(lobbyChat, "Public Chat");
 		add(chat, BorderLayout.EAST);
-		
+		backend.chat = chat;////
 	} // end constructor
 } // end class TablePanel

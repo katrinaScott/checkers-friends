@@ -26,9 +26,12 @@ public class LobbyPanel extends JPanel {
 	 * 
 	 */
 	
-	public LobbyPanel(Hashtable<Integer, Table> tables) {
+	public LobbyPanel(Hashtable<Integer, Table> tables, Lobby backend) {
 		
 		this.tables = tables;
+		
+		////
+		Lobby this.backend = backend;
 		
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
@@ -77,7 +80,6 @@ public class LobbyPanel extends JPanel {
 		lobbyChat.setBackground(Color.DARK_GRAY);
 		chat.add(lobbyChat, "Public Chat");
 		add(chat, BorderLayout.EAST);
-		
 		setVisible(true);
 
 	} // end constructor
@@ -96,6 +98,8 @@ public class LobbyPanel extends JPanel {
 		table.setForeground(Color.WHITE);
 		tablePanel.add(table);
 		
+		backend.createTable();////
+		
 		// if applicable, create join button
 		JButton joinButton = new JButton("Join");
 		joinButton.setBackground(Color.GRAY);
@@ -105,6 +109,7 @@ public class LobbyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent join) {
 				// join table as player
+				backend.joinTable(number);////
 			}
 		});
 		tablePanel.add(joinButton);
@@ -118,6 +123,7 @@ public class LobbyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent watch) {
 				// join table as observer
+				backend.observeTable(number);////
 			}
 		});
 		tablePanel.add(watchButton);
