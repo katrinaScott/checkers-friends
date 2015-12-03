@@ -19,13 +19,14 @@ import javax.swing.JLabel;
 public class TablePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	
+	Table backend;
+                
 	/*
 	 * 
 	 */
 	
 	public TablePanel(Table backend) {
-		Table this.backend = backend;
+		this.backend = backend;
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
@@ -111,6 +112,5 @@ public class TablePanel extends JPanel {
 		lobbyChat.setBackground(Color.DARK_GRAY);
 		chat.add(lobbyChat, "Public Chat");
 		add(chat, BorderLayout.EAST);
-		backend.chat = chat;////
 	} // end constructor
 } // end class TablePanel

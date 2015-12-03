@@ -7,6 +7,7 @@ package src.Table;
 
 import src.UI.LobbyPanel;
 import java.util.ArrayList;
+import java.util.Hashtable;
 
 /**
  *
@@ -14,19 +15,24 @@ import java.util.ArrayList;
  */
 public class Lobby extends Place {
     ArrayList<Table> tables = new ArrayList<Table>();
-    ArrayList<Player> freePlayers;// = new ArrayList<Player>();
+    ArrayList<String> players;// = new ArrayList<Player>();
     ArrayList<Table> freeTables = new ArrayList<Table>();
 //    ArrayList<Table> playingTables = new ArrayList<Table>();
+    LobbyPanel frontend;
     
     public Lobby(){
         super();
+        Hashtable<Integer, Table> hash = new Hashtable();
+        frontend = new LobbyPanel(hash, this);
 		//TODO get list of players from the server? to display for people to select for private chats?
+        
     }
     
     public boolean joinTable(int table){
         for(int i=0; i < freeTables.size(); i++){
             if(freeTables.get(i).getID() == table){
                 //TODO make request
+                freeTables.get(i).requestToPlay();
                 return true;
             }
         }
@@ -49,9 +55,28 @@ public class Lobby extends Place {
         Table newTable = new Table(newID);
         tables.add(newTable);
         freeTables.add(newTable);
-		if(creatorID.length() > 0){
-			joinTable(creatorID, newID);
-		}
+        joinTable(newID);
         return true;
+    }
+    
+    public void refresh(String[] playerIDs){
+        //TODO not sure what to put here?
+        for(int i=0; i<playerIDs.length; i++){
+            players.add(playerIDs[i]);
+        }
+    }
+    
+    public void add(String playerID){
+        //TODO
+        players.add(playerID);
+    }
+    
+    public void remove(String playerID){
+        //TODO
+        players.remove(playerID);
+    }
+    
+    public LobbyPanel getLobbyPanel(){
+        return frontend;
     }
 }

@@ -6,6 +6,7 @@
 package src.Table;
 
 import src.UI.TablePanel;
+import src.Board.Board;
 import java.util.ArrayList;
 
 /**
@@ -14,10 +15,10 @@ import java.util.ArrayList;
  */
 public class Table extends Place {
     int tableID;
-    ArrayList<String> activePlayers = new ArrayList<String>();
-    ArrayList<String> observers = new ArrayList<String>();
+    ArrayList<Integer> activePlayers = new ArrayList<Integer>();
+    ArrayList<Integer> observers = new ArrayList<Integer>();
     boolean active = false;
-    Board_temp gameboard;
+    Board gameboard;
     
     Table(int ID){
         super();
@@ -25,7 +26,7 @@ public class Table extends Place {
 		TablePanel frontend = new TablePanel(this);
     }
     
-    public boolean requestToPlay(String playerID){
+    public boolean requestToPlay(int playerID){
         if(activePlayers.size() < 2){
             activePlayers.add(playerID);
             return true;
@@ -38,7 +39,7 @@ public class Table extends Place {
 	public boolean requestToPlay(){
 		//TODO make playerID
         if(activePlayers.size() < 2){
-            activePlayers.add(playerID);
+            activePlayers.add(activePlayers.size()+1);
 			readyToPlay();
             return true;
         }
@@ -49,7 +50,7 @@ public class Table extends Place {
     
     public boolean requestToObserve(){
 		//TODO make observerID
-        observers.add(observerID);
+        observers.add(observers.size()+1);
         return true;
     }
     

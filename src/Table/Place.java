@@ -10,7 +10,7 @@ import src.Chat.PublicChat;
  *
  * @author XanderH11
  */
-public class CheckerPlace {
+public class Place {
     
     public int exit(){
         return 0;

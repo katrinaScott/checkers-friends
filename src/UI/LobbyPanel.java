@@ -21,7 +21,7 @@ public class LobbyPanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private Hashtable<Integer, Table> tables;
-	
+	Lobby backend;
 	/*
 	 * 
 	 */
@@ -31,7 +31,7 @@ public class LobbyPanel extends JPanel {
 		this.tables = tables;
 		
 		////
-		Lobby this.backend = backend;
+		this.backend = backend;
 		
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
@@ -102,6 +102,8 @@ public class LobbyPanel extends JPanel {
 		
 		// if applicable, create join button
 		JButton joinButton = new JButton("Join");
+                joinButton.setName("" + number);
+                //joinButton.setText("Join");//if the button shows up with a number instead of a word, uncomment this
 		joinButton.setBackground(Color.GRAY);
 		joinButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 10));
 		joinButton.setForeground(Color.WHITE);
@@ -109,13 +111,17 @@ public class LobbyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent join) {
 				// join table as player
-				backend.joinTable(number);////
+                            JButton b = (JButton) join.getSource();
+                            int num = Character.getNumericValue(b.getName().charAt(0));
+                            backend.joinTable(num);////
 			}
 		});
 		tablePanel.add(joinButton);
 		
 		// create watch button
 		JButton watchButton = new JButton("Watch");
+		joinButton.setName("" + number);
+                //joinButton.setText("Watch");//if the button shows up with a number instead of a word, uncomment this
 		watchButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 10));
 		watchButton.setForeground(Color.WHITE);
 		watchButton.setBackground(Color.GRAY);
@@ -123,7 +129,9 @@ public class LobbyPanel extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent watch) {
 				// join table as observer
-				backend.observeTable(number);////
+                            JButton b = (JButton) watch.getSource();
+                            int num = Character.getNumericValue(b.getName().charAt(0));
+                            backend.observeTable(num);////
 			}
 		});
 		tablePanel.add(watchButton);
