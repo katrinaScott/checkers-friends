@@ -27,21 +27,23 @@ public class Table extends Place {
         frontend = new TablePanel(this);
     }
     
-    public boolean requestToPlay(int playerID){
-        if(activePlayers.size() < 2){
-            activePlayers.add(playerID);
-            return true;
-        }
-        else{
-            return false;
-        }
-    }
+//    public boolean requestToPlay(int playerID){
+//        if(activePlayers.size() < 2){
+//            activePlayers.add(playerID);
+//            readyToPlay();
+//            frontend.setVisible(true);
+//            return true;
+//        }
+//        else{
+//            return false;
+//        }
+//    }
 	
 	public boolean requestToPlay(){
-		//TODO make playerID
         if(activePlayers.size() < 2){
             activePlayers.add(activePlayers.size()+1);
-			readyToPlay();
+            frontend.setVisible(true);
+            readyToPlay();
             return true;
         }
         else{
@@ -50,14 +52,14 @@ public class Table extends Place {
     }
     
     public boolean requestToObserve(){
-		//TODO make observerID
         observers.add(observers.size()+1);
+        frontend.setVisible(true);
         return true;
     }
     
     public void readyToPlay(){
         if(activePlayers.size() == 2){
-            //TODO call to server
+            //TODO call to server?
             setBoard();
         }
     }

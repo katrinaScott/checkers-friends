@@ -34,6 +34,8 @@ public class Lobby extends Place {
                 //TODO make request
                 freeTables.get(i).requestToPlay();
                 return true;
+            }else{
+                
             }
         }
         return false;
