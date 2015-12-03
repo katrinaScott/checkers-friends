@@ -23,6 +23,7 @@ public class Lobby extends Place {
     public Lobby(){
         super();
         Hashtable<Integer, Table> hash = new Hashtable();
+        // fill preexisting tables before building panel
         frontend = new LobbyPanel(hash, this);
 		//TODO get list of players from the server? to display for people to select for private chats?
         
@@ -78,5 +79,9 @@ public class Lobby extends Place {
     
     public LobbyPanel getLobbyPanel(){
         return frontend;
+    }
+    
+    public void addTable(int tid) {
+    	frontend.addTable(tid);
     }
 }

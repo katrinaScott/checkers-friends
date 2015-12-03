@@ -20,9 +20,12 @@ public class PrivateChat extends JPanel implements Chat {
 	JTextArea chatArea;
 	JTextField input;
 	JButton sendButton;
-	String userName;
+	String userName = "wrong";
+	String otherUser;
 	
-	public PrivateChat() {
+	public PrivateChat(String other) {
+		
+		this.otherUser = other;
 		
 		setLayout(new BorderLayout(0, 0));
 		
@@ -61,25 +64,45 @@ public class PrivateChat extends JPanel implements Chat {
 	
 	private void getInput() {
 		// TODO Auto-generated method stub
+		String userInput = input.getText();
+		appendUserMessage(getUserName(), userInput);
+		input.setText("");
 
 	}
 
 	@Override
 	public void appendUserMessage(String user, String msg) {
 		// TODO Auto-generated method stub
+		if (msg.charAt(msg.length() - 1) != '\n') {
+			msg += "\n";
+		}
+		
+		String newLine = user + ": " + msg;
+		//display bold/colored username
+		
+		chatArea.setText(chatArea.getText() + newLine);
 
 	}
 
 	@Override
 	public void setUserName(String user) {
 		// TODO Auto-generated method stub
+		this.userName = user;
 
 	}
 
 	@Override
 	public String getUserName() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.userName;
+	}
+	
+	public void setOtherUser(String user) {
+		this.otherUser = user;
+	}
+	
+	public String getOtherUser() {
+		return this.otherUser;
 	}
 
 }

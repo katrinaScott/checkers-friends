@@ -51,12 +51,13 @@ public class Client extends Thread implements CheckersClient {
 		login = new LoginPopup();
 		ip = login.getIP();
 		clientName = login.getUsername();
-		server.connectToServer(ip, clientName);
-
-		// temp to call the method you want to test (delete default IP upon login)
-		//connectionOK();
-		//nameIllegal();
-		//nameInUseError();
+		chat.setUserName(clientName);
+		// do the same for any privateChats
+		// cheating so we can work on the lobby/tables - should NOT manually call connectionOK
+		boolean connected = server.connectToServer(ip, clientName);
+		if (connected) {
+			connectionOK();
+		}
 		
 	}
 	
@@ -71,6 +72,7 @@ public class Client extends Thread implements CheckersClient {
 	public void youInLobby(){
 		
 		//lobby.add();
+		//frame = new MainFrame(server, lobby);
 		chat.appendServerMessage("you have joined the lobby");
 		
 	}
@@ -87,7 +89,7 @@ public class Client extends Thread implements CheckersClient {
 		
 		if (pm) {
 			if(!privateChats.containsKey(user)) {
-				PrivateChat privateMsg = new PrivateChat();
+				PrivateChat privateMsg = new PrivateChat(user);
 				privateChats.put(user, privateMsg);
 				privateMsg.appendUserMessage(user, msg);
 			} else {
@@ -127,6 +129,7 @@ public class Client extends Thread implements CheckersClient {
 	
             //Probably need more here
             chat.appendServerMessage("The table \"Table " + tid + "\" has been created!");
+            lobby.addTable(tid);
             
 	}
 	
@@ -238,6 +241,8 @@ public class Client extends Thread implements CheckersClient {
 	
 	//a network exception occured. msg contains details.
 	public void networkException(String msg) {
+		
+		System.out.println("NETWORK EXCEPTION: " + msg);
 		
 	}
 	

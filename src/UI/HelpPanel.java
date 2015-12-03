@@ -53,6 +53,11 @@ public class HelpPanel extends JPanel {
 		add(scrollable);
 		
 		JButton close = closeButton();
+		close.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				// close this panel, hopefully leaving the lobby intact underneath
+			}
+		});
 		add(close);
 		
 	} // end constructor

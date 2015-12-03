@@ -20,7 +20,7 @@ public class Table extends Place {
     boolean active = false;
     Board gameboard;
     
-    Table(int ID){
+    public Table(int ID){
         super();
         tableID = ID;
 		TablePanel frontend = new TablePanel(this);

@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 import javax.swing.SpringLayout;
 
+import src.Board.Board;
+import src.Board.MakeBoard;
 import src.Chat.PublicChat;
 import javax.swing.JLabel;
 
@@ -26,7 +28,9 @@ public class TablePanel extends JPanel {
 	 */
 	
 	public TablePanel(Table backend) {
+		
 		this.backend = backend;
+		
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
@@ -35,7 +39,7 @@ public class TablePanel extends JPanel {
 		SpringLayout boardLayout = new SpringLayout();
 		boardPanel.setLayout(boardLayout);
 		
-		// add help if player, otherwise add back to lobby
+		// add help if playing, otherwise add back to lobby
 		JButton help = new JButton("HELP");
 		boardLayout.putConstraint(SpringLayout.WEST, help, 10, SpringLayout.WEST, boardPanel);
 		boardLayout.putConstraint(SpringLayout.SOUTH, help, -10, SpringLayout.SOUTH, boardPanel);
@@ -112,5 +116,7 @@ public class TablePanel extends JPanel {
 		lobbyChat.setBackground(Color.DARK_GRAY);
 		chat.add(lobbyChat, "Public Chat");
 		add(chat, BorderLayout.EAST);
+		
+		setVisible(true);
 	} // end constructor
 } // end class TablePanel
