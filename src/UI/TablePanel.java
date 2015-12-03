@@ -15,11 +15,13 @@ import javax.swing.SpringLayout;
 
 import src.Chat.PublicChat;
 import javax.swing.JLabel;
+import src.Board.*;
 
 public class TablePanel extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	Table backend;
+        public JPanel boardPanel;
                 
 	/*
 	 * 
@@ -30,7 +32,7 @@ public class TablePanel extends JPanel {
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel boardPanel = new JPanel();
+		boardPanel = new JPanel();
 		boardPanel.setBackground(Color.DARK_GRAY);
 		SpringLayout boardLayout = new SpringLayout();
 		boardPanel.setLayout(boardLayout);

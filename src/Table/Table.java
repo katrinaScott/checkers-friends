@@ -6,8 +6,8 @@
 package src.Table;
 
 import src.UI.TablePanel;
-import src.Board.Board;
 import java.util.ArrayList;
+import src.Board.*;
 
 /**
  *
@@ -19,11 +19,12 @@ public class Table extends Place {
     ArrayList<Integer> observers = new ArrayList<Integer>();
     boolean active = false;
     Board gameboard;
+    TablePanel frontend;
     
     Table(int ID){
         super();
         tableID = ID;
-		TablePanel frontend = new TablePanel(this);
+        frontend = new TablePanel(this);
     }
     
     public boolean requestToPlay(int playerID){
@@ -75,6 +76,8 @@ public class Table extends Place {
     
     public void setBoard(){
         gameboard = new Board();
+        MakeBoard mb = new MakeBoard();
+        mb.generateBoard(gameboard, frontend.boardPanel);
     }
         
 }
