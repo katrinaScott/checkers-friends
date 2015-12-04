@@ -28,7 +28,9 @@ public class MainFrame extends JFrame {
 	private static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height - 150;
 	private Timer pause;
 	private Lobby lobby;
+        private LobbyPanel lobbyPanel;
 	private ServerCommunicator server;
+        private JPanel title;
 	
 	/*
 	 * 
@@ -51,7 +53,7 @@ public class MainFrame extends JFrame {
 		//setVisible(true);
 		
 		// initialize title screen
-		JPanel title = new JPanel();
+		title = new JPanel();
 		title.setBackground(Color.DARK_GRAY);
 		title.setLayout(new BorderLayout());
 		JLabel name = new JLabel("CHECKERS & FRIENDS");
@@ -66,7 +68,7 @@ public class MainFrame extends JFrame {
 		// NO MORE LOGIN SCREEN- GO STRAIGHT TO LOBBY
 		
 		lobby = new Lobby();
-		LobbyPanel lobbyPanel = lobby.getLobbyPanel();
+		lobbyPanel = lobby.getLobbyPanel();
 		
 		// pause for 5 seconds
 		ActionListener wait = new ActionListener() {
