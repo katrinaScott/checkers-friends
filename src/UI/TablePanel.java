@@ -5,6 +5,7 @@ import src.Table.Table;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -41,6 +42,15 @@ public class TablePanel extends JPanel {
 		SpringLayout boardLayout = new SpringLayout();
 		boardPanel.setLayout(boardLayout);
 		
+		MakeBoard MaketheBoard = new MakeBoard();
+		
+		JPanel board = new JPanel(new GridLayout(8, 8));
+
+        Board theGameBoard = new Board();
+
+        MaketheBoard.generateBoard(theGameBoard, board);
+        boardPanel.add(board);
+		
 		// add help if playing, otherwise add back to lobby
 		JButton help = new JButton("HELP");
 		boardLayout.putConstraint(SpringLayout.WEST, help, 10, SpringLayout.WEST, boardPanel);
@@ -71,14 +81,15 @@ public class TablePanel extends JPanel {
 //		});
 //		boardPanel.add(lobby);
 		
-		JLabel username = new JLabel("Username");
+		JLabel username = new JLabel(backend.getUsername());
 		username.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
 		username.setForeground(Color.WHITE);
 		boardLayout.putConstraint(SpringLayout.WEST, username, 10, SpringLayout.WEST, boardPanel);
 		boardLayout.putConstraint(SpringLayout.SOUTH, username, -22, SpringLayout.NORTH, help);
 		boardPanel.add(username);
 		
-		JLabel opponent = new JLabel("Opponent");
+		// ugh fuck i forgot i used SpringLayout so this isn't even showing up because fuck SpringLayout
+		JLabel opponent = new JLabel(backend.getOpponent());
 		boardLayout.putConstraint(SpringLayout.NORTH, opponent, 10, SpringLayout.NORTH, boardPanel);
 		boardLayout.putConstraint(SpringLayout.WEST, opponent, 0, SpringLayout.WEST, help);
 		opponent.setForeground(Color.WHITE);
@@ -93,7 +104,7 @@ public class TablePanel extends JPanel {
 		btnHint.setForeground(Color.WHITE);
 		btnHint.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		boardPanel.add(btnHint);
-		
+		/*
 		// obviously update to show variable score
 		JLabel lblScore = new JLabel("score");
 		lblScore.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
@@ -110,7 +121,7 @@ public class TablePanel extends JPanel {
 		label.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
 		label.setBackground(Color.DARK_GRAY);
 		boardPanel.add(label);
-		
+		 */
 		add(boardPanel, BorderLayout.CENTER);
 		
 		JTabbedPane chat = new JTabbedPane();
