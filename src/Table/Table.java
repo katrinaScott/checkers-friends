@@ -17,8 +17,8 @@ public class Table extends Place {
     int tableID;
     ArrayList<Integer> activePlayers = new ArrayList<Integer>();
     ArrayList<Integer> observers = new ArrayList<Integer>();
-    private String username = "Temp";
-    private String opponent = "Temp";
+    private String username = "Temp User";
+    private String opponent = "Temp Opponent";
     boolean active = false;
     Board gameboard;
     TablePanel frontend;

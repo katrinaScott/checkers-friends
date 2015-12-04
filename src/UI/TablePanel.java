@@ -42,15 +42,6 @@ public class TablePanel extends JPanel {
 		SpringLayout boardLayout = new SpringLayout();
 		boardPanel.setLayout(boardLayout);
 		
-		MakeBoard MaketheBoard = new MakeBoard();
-		
-		JPanel board = new JPanel(new GridLayout(8, 8));
-
-        Board theGameBoard = new Board();
-
-        MaketheBoard.generateBoard(theGameBoard, board);
-        boardPanel.add(board);
-		
 		// add help if playing, otherwise add back to lobby
 		JButton help = new JButton("HELP");
 		boardLayout.putConstraint(SpringLayout.WEST, help, 10, SpringLayout.WEST, boardPanel);
@@ -82,7 +73,7 @@ public class TablePanel extends JPanel {
 //		boardPanel.add(lobby);
 		
 		JLabel username = new JLabel(backend.getUsername());
-		username.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+		username.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 		username.setForeground(Color.WHITE);
 		boardLayout.putConstraint(SpringLayout.WEST, username, 10, SpringLayout.WEST, boardPanel);
 		boardLayout.putConstraint(SpringLayout.SOUTH, username, -22, SpringLayout.NORTH, help);
@@ -93,7 +84,7 @@ public class TablePanel extends JPanel {
 		boardLayout.putConstraint(SpringLayout.NORTH, opponent, 10, SpringLayout.NORTH, boardPanel);
 		boardLayout.putConstraint(SpringLayout.WEST, opponent, 0, SpringLayout.WEST, help);
 		opponent.setForeground(Color.WHITE);
-		opponent.setFont(new Font("DejaVu Sans", Font.BOLD, 15));
+		opponent.setFont(new Font("DejaVu Sans", Font.BOLD, 30));
 		boardPanel.add(opponent);
 		
 		// add hint if player
@@ -104,25 +95,43 @@ public class TablePanel extends JPanel {
 		btnHint.setForeground(Color.WHITE);
 		btnHint.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		boardPanel.add(btnHint);
-		/*
+		
 		// obviously update to show variable score
 		JLabel lblScore = new JLabel("score");
-		lblScore.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		lblScore.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		lblScore.setForeground(Color.WHITE);
 		lblScore.setBackground(Color.DARK_GRAY);
-		boardLayout.putConstraint(SpringLayout.NORTH, lblScore, 65, SpringLayout.NORTH, boardPanel);
-		boardLayout.putConstraint(SpringLayout.EAST, lblScore, -27, SpringLayout.EAST, boardPanel);
+		boardLayout.putConstraint(SpringLayout.NORTH, lblScore, 150, SpringLayout.NORTH, boardPanel);
+		boardLayout.putConstraint(SpringLayout.EAST, lblScore, -500, SpringLayout.EAST, boardPanel);
 		boardPanel.add(lblScore);
 		
 		JLabel label = new JLabel("score");
-		boardLayout.putConstraint(SpringLayout.NORTH, label, 56, SpringLayout.SOUTH, lblScore);
+		boardLayout.putConstraint(SpringLayout.NORTH, label, 375, SpringLayout.SOUTH, lblScore);
 		boardLayout.putConstraint(SpringLayout.EAST, label, 0, SpringLayout.EAST, lblScore);
 		label.setForeground(Color.WHITE);
-		label.setFont(new Font("DejaVu Sans", Font.BOLD, 20));
+		label.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
 		label.setBackground(Color.DARK_GRAY);
 		boardPanel.add(label);
-		 */
+		 
 		add(boardPanel, BorderLayout.CENTER);
+		
+		JPanel panel = new JPanel();
+		panel.setBackground(Color.DARK_GRAY);
+		boardLayout.putConstraint(SpringLayout.NORTH, panel, 50, SpringLayout.SOUTH, opponent);
+		boardLayout.putConstraint(SpringLayout.WEST, panel, 0, SpringLayout.WEST, help);
+		boardLayout.putConstraint(SpringLayout.SOUTH, panel, 675, SpringLayout.SOUTH, opponent);
+		boardLayout.putConstraint(SpringLayout.EAST, panel, 625, SpringLayout.WEST, boardPanel);
+		
+		MakeBoard MaketheBoard = new MakeBoard();
+		
+		JPanel board = new JPanel(new GridLayout(8, 8));
+
+        Board theGameBoard = new Board();
+
+        MaketheBoard.generateBoard(theGameBoard, board);
+        panel.add(board);
+		
+		boardPanel.add(panel);
 		
 		JTabbedPane chat = new JTabbedPane();
 		JPanel lobbyChat = new PublicChat();
