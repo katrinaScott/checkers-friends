@@ -60,7 +60,12 @@ public class Table extends Place {
     
     public boolean requestToObserve(){
         observers.add(observers.size()+1);
+        frame.add(frontend);
         frontend.setVisible(true);
+        frame.pack();
+        frame.setTitle("Table " + tableID);
+        frame.setSize(1500, 1000);
+        frame.setVisible(true);
         return true;
     }
     
