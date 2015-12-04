@@ -28,9 +28,9 @@ public class MainFrame extends JFrame {
 	private static final int WINDOW_HEIGHT = Toolkit.getDefaultToolkit().getScreenSize().height - 150;
 	private Timer pause;
 	private Lobby lobby;
-        private LobbyPanel lobbyPanel;
+    private LobbyPanel lobbyPanel;
 	private ServerCommunicator server;
-        private JPanel title;
+    private JPanel title;
 	
 	/*
 	 * 
