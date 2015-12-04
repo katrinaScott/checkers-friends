@@ -20,6 +20,7 @@ import javax.swing.WindowConstants;
 
 import src.Communications.ServerCommunicator;
 import src.Table.Lobby;
+import src.Table.Table;
 
 public class MainFrame extends JFrame {
 	
@@ -65,7 +66,14 @@ public class MainFrame extends JFrame {
 		
 		setVisible(true);
 		
-		// NO MORE LOGIN SCREEN- GO STRAIGHT TO LOBBY
+		// start temp code
+		//remove(title);
+		//Table table = new Table(0);
+		//add(table.getTablePanel());
+		//revalidate();
+		// end temp code
+		
+		// comment out below and uncomment temp code above to replace lobby with table
 		
 		lobby = new Lobby();
 		lobbyPanel = lobby.getLobbyPanel();
@@ -83,7 +91,7 @@ public class MainFrame extends JFrame {
 		};
 		pause = new Timer(3000, wait);
 		pause.start();
-
+		
 	} // end constructor
 	
 	/*
