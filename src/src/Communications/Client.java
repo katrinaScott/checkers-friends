@@ -51,12 +51,13 @@ public class Client extends Thread implements CheckersClient {
 		login = new LoginPopup();
 		ip = login.getIP();
 		clientName = login.getUsername();
-		server.connectToServer(ip, clientName);
-
-		// temp to call the method you want to test (delete default IP upon login)
-		//connectionOK();
-		//nameIllegal();
-		//nameInUseError();
+		chat.setUserName(clientName);
+		// do the same for any privateChats
+		// cheating so we can work on the lobby/tables - should NOT manually call connectionOK
+		boolean connected = server.connectToServer(ip, clientName);
+		if (connected) {
+			connectionOK();
+		}
 		
 	}
 	
@@ -71,7 +72,7 @@ public class Client extends Thread implements CheckersClient {
 	public void youInLobby(){
 		
 		//lobby.add();
-		chat.appendServerMessage("you have joined the lobby");
+		chat.appendServerMessage("You have joined the lobby.\n");
 		
 	}
 	
@@ -111,7 +112,7 @@ public class Client extends Thread implements CheckersClient {
 	public void nowJoinedLobby(String user) {
 		
 		lobby.add(user);
-		chat.appendServerMessage(user + " has joined the lobby");
+		chat.appendServerMessage(user + " has joined the lobby.\n");
 		
 	}
 	
@@ -119,14 +120,15 @@ public class Client extends Thread implements CheckersClient {
 	public void nowLeftLobby(String user){
 		
 		lobby.remove(user);
-		chat.appendServerMessage(user + " has left the lobby");
+		chat.appendServerMessage(user + " has left the lobby.\n");
 	}
 	
 	//alert that a new table has been created with id tid.
 	public void newTable(int tid) {
 	
             //Probably need more here
-            chat.appendServerMessage("The table \"Table " + tid + "\" has been created!");
+            chat.appendServerMessage("The table \"Table " + tid + "\" has been created!\n");
+            lobby.addTable(tid);
             
 	}
 	
@@ -134,7 +136,7 @@ public class Client extends Thread implements CheckersClient {
 	public void joinedTable(int tid) {
 	
             //Probably need more here
-            chat.appendServerMessage("You have joined Table " + tid + "!");
+            chat.appendServerMessage("You have joined Table " + tid + "!\n");
             
             
 	}
@@ -143,7 +145,7 @@ public class Client extends Thread implements CheckersClient {
 	public void alertLeftTable() {
 		
             //Probably need more here
-            chat.appendServerMessage("You have left the table! Rage quit?");
+            chat.appendServerMessage("You have left the table! Rage quit?\n");
             
 	}
 	
@@ -151,7 +153,7 @@ public class Client extends Thread implements CheckersClient {
 	public void gameStart() {
 	
             //Probably need more here
-            chat.appendServerMessage("A game is starting at your table, get ready if you're playing!");
+            chat.appendServerMessage("A game is starting at your table, get ready if you're playing!\n");
             
 	}
 	
@@ -159,7 +161,7 @@ public class Client extends Thread implements CheckersClient {
 	public void colorBlack() {
 		
 		//set player as black?
-		chat.appendServerMessage("You are playing as black for the game.");
+		chat.appendServerMessage("You are playing as black for the game.\n");
 		
 	}
 	
@@ -167,13 +169,15 @@ public class Client extends Thread implements CheckersClient {
 	public void colorRed() {
 		
 		//set player as red?
-		chat.appendServerMessage("You are playing as red for the game.");
+		chat.appendServerMessage("You are playing as red for the game.\n");
 		
 	}
 	
 	//notice that your opponent has moved from position (fr,fc) to (tr,tc)
 	public void oppMove(int fr, int fc, int tr, int tc) {
-		
+            
+		chat.appendServerMessage("Your opponent moved from square (" + fr + ", " + fc + ") to square (" + tr + ", " + tc + ").\n");
+                
 	}
 	
 	/* this is alert is an update to the board state. <boardState> is a matrix
@@ -208,29 +212,41 @@ public class Client extends Thread implements CheckersClient {
 	//an alert saying that a table state has changed.
 	//this is received whenever anyone joins or leaves a table.
 	public void onTable(int tid, String blackSeat, String redSeat) {
-		
-	}
+	
+            chat.appendServerMessage("Table " + tid + " has changed!" + "\n" + blackSeat + " " + redSeat + ".\n");
+            
+	}//End onTable
 	
 	//a list of the current table ids on the server. To get the status of a table
 	//you must query the server with a tid.
 	public void tableList(int[] tids) {
-		
-	}
+	
+            chat.appendServerMessage("Here is a list of the current Table ids on the server: \n");
+            
+            for (int i = 0; i < tids.length; i++) {
+                chat.appendServerMessage("Table " + tids[i] + "\n");
+            }//End for
+            
+	}//End tableList
 	
 	//its your turn.
 	public void yourTurn() {
-		
-	}
+		chat.appendServerMessage("It's your turn!\n");
+	}//End yourTurn
 	
 	//you are now observing table tid.
 	public void nowObserving(int tid) {
-		
-	}
+            
+		chat.appendServerMessage("You are now observing Table " + tid + "\n");
+                
+	}//End nowObserving
 	
 	//you stopped observing table tid.
 	public void stoppedObserving(int tid) {
 		
-	}
+            chat.appendServerMessage("You are no longer observing Table " + tid + "\n");
+            
+	}//End stoppedObserving
 
 
 	/** Error messages
@@ -239,7 +255,10 @@ public class Client extends Thread implements CheckersClient {
 	//a network exception occured. msg contains details.
 	public void networkException(String msg) {
 		
-	}
+            chat.appendServerMessage("Uh oh! Something went wrong with the network!\n");
+            System.out.println("NETWORK EXCEPTION: " + msg);
+            
+	}//End networkException
 	
 	//the username sent is already in use. This error disconnects you from the server.
 	public void nameInUseError() {
@@ -247,7 +266,7 @@ public class Client extends Thread implements CheckersClient {
 		JOptionPane.showMessageDialog(null, "Name already taken- try again");
 		login();
 		
-	}
+	}//nameInUseError
 	
 	//the username sent is illegal...length = 0 or has whitespace.
 	public void nameIllegal() {
@@ -255,62 +274,83 @@ public class Client extends Thread implements CheckersClient {
 		JOptionPane.showMessageDialog(null, "Invalid name- try again");
 		login();
 		
-	}
+	}//end nameIllegal
 	
 	//the requested move is illegal.
 	public void illegalMove() {
 		
 		//printMessageToClient("the move you tried to make is not valid");
+            chat.appendServerMessage("The move you tried to make is not valid. Maybe the space is occupied?\n");
 		
-	}
+	}//End illegalMove
 	
 	//the table your trying to join is full.
 	public void tableFull() {
 		
-	}
+            chat.appendServerMessage("The table you are trying to join is already full!\n");
+            
+	}//End tableFull
 	
 	//the table queried does not exist.
 	public void tblNotExists() {
-		
-	}
+	
+            chat.appendServerMessage("The table requested does not exist.\n");
+            
+	}//End tblNotExists
 	
 	//called if you say you are ready on a table with no current game.
 	public void gameNotCreatedYet() {
 		
-	}
+            chat.appendServerMessage("I see you're ready, but there's no game at this table yet!\n");
+            
+	}//End gameNotCreatedYet
 	
 	//called if it is not your turn but you make a move.
 	public void notYourTurn() {
 		
-	}
+            chat.appendServerMessage("Wait your turn!\n");
+            
+	}//End notYourTurn
 	
 	//called if you send a stop observing command but you are not observing a table.
 	public void notObserving() {
 		
-	}
+            chat.appendServerMessage("You are not currently observing a table.\n");
+            
+	}//end notObserving
 	
 	//called if you send a game command but your opponent is not ready
 	public void oppNotReady() {
 		
-	}
+            chat.appendServerMessage("You need to wait for your opponent to be ready before you try to play.\n");
+            
+	}//End oppNotReady
 	
 	//you cannot perform the requested operation because you are in the lobby.
 	public void errorInLobby() {
 		
-	}
+            chat.appendServerMessage("You can't do that while you are in the lobby!\n");
+            
+	}//End errorInLobby
 	
 	//called if the client sends an ill-formated TCP message
 	public void badMessage() {
-		
+	
+            chat.appendServerMessage("Something funky happened during the last communication with the server...\n");
+            
 	}
 
 	//called when your opponent leaves the table
 	public void oppLeftTable() {
 
-	}
+            chat.appendServerMessage("Your opponent left the table.\n");
+            
+	}//End oppLeftTable
 
 	//you cannot perform the requested op because you are not in the lobby.
 	public void notInLobby() {
+            
+            chat.appendServerMessage("You can't do that unless you are in the lobby!\n");
 
 	}
 
