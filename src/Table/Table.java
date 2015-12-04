@@ -6,8 +6,13 @@
 package src.Table;
 
 import src.UI.TablePanel;
+
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+
 import src.Board.*;
 
 /**
@@ -23,7 +28,7 @@ public class Table extends Place {
     boolean active = false;
     Board gameboard;
     TablePanel frontend;
-    JFrame frame = new JFrame();
+    private static JFrame frame = new JFrame();
     
     public Table(int ID){
         super();
@@ -49,8 +54,9 @@ public class Table extends Place {
             frame.add(frontend);
             frontend.setVisible(true);
             frame.pack();
-            frame.setTitle("Table " + tableID);
+            frame.setTitle("Table " + getID());
             frame.setSize(1500, 1000);
+            frame.addWindowListener(new ConfirmExit());
             frame.setVisible(true);
             readyToPlay();
             return frontend;
@@ -100,5 +106,25 @@ public class Table extends Place {
     public String getOpponent() {
     	return this.opponent;
     }
+    
+    public static JFrame getFrame() {
+    	return frame;
+    }
+    
+	static class ConfirmExit extends WindowAdapter {
+		
+		@Override
+		public void windowClosing(WindowEvent exit) {
+			
+			int result = JOptionPane.showConfirmDialog(null, "Are you sure you want to leave the table? \nYou will automatically lose the game",
+					"", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+			
+			if (result == 0) {
+				getFrame().dispose();
+			} // end if-close
+			
+		} // end method windowClosing
+		
+	} // end class ConfirmExit
         
 }
