@@ -13,6 +13,7 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Hashtable;
+import java.util.Scanner;
 
 import javax.swing.JButton;
 import javax.swing.BoxLayout;
@@ -43,7 +44,7 @@ public class LobbyPanel extends JPanel {
 		tablePane.setLayout(new BoxLayout(tablePane, BoxLayout.Y_AXIS));
 		// for each table in database
 		for(int i = 0; i < tables.size(); i++) {
-			JPanel table = addTable(i+1, 0);
+			JPanel table = addTable(i, 0);
 			tablePane.add(table);
 		}
 		
@@ -93,11 +94,11 @@ public class LobbyPanel extends JPanel {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
 		
-		JLabel table = new JLabel("Table " + number);
+		JLabel table = new JLabel("Table " + (number+1));
 		table.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		table.setForeground(Color.WHITE);
 		tablePanel.add(table);
-		
+                
 		backend.createTable(number, join);////
 		
 		// if applicable, create join button
@@ -112,7 +113,8 @@ public class LobbyPanel extends JPanel {
 			public void actionPerformed(ActionEvent join) {
 				// join table as player
                             JButton b = (JButton) join.getSource();
-                            int num = Character.getNumericValue(b.getName().charAt(0));
+                            Scanner dumbo = new Scanner(b.getName());
+                            int num = dumbo.nextInt();//Character.getNumericValue(b.getName().charAt(0));
                             backend.joinTable(num);////
 			}
 		});
@@ -130,7 +132,8 @@ public class LobbyPanel extends JPanel {
 			public void actionPerformed(ActionEvent watch) {
 				// join table as observer
                             JButton b = (JButton) watch.getSource();
-                            int num = Character.getNumericValue(b.getName().charAt(0));
+                            Scanner dumbo = new Scanner(b.getName());
+                            int num = dumbo.nextInt();//int num = Character.getNumericValue(b.getName().charAt(0));
                             backend.observeTable(num);////
 			}
 		});

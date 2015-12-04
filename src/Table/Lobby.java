@@ -24,7 +24,7 @@ public class Lobby extends Place {
     public Lobby(){
         super();
         Hashtable<Integer, Table> hash = new Hashtable();
-        for(int i=-1; i< 9; i++){
+        for(int i=0; i< 9; i++){
             Table element = new Table(i);
             tables.add(element);
             freeTables.add(element);

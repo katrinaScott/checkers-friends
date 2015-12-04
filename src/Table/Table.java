@@ -30,10 +30,12 @@ public class Table extends Place {
     TablePanel frontend;
     private static JFrame frame = new JFrame();
     
+    
     public Table(int ID){
         super();
         tableID = ID;
         frontend = new TablePanel(this);
+        frame.setTitle("Table "+(ID+1));
     }
     
 //    public boolean requestToPlay(int playerID){
