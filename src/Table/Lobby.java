@@ -57,7 +57,7 @@ public class Lobby extends Place {
             if(i == table){
                 tables.get(i).requestToObserve();
                 return true;
-            }
+            } 
         }
         return false;//this should never happen
     }
