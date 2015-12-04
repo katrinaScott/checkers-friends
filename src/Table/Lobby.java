@@ -8,21 +8,28 @@ package src.Table;
 import src.UI.LobbyPanel;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import src.UI.TablePanel;
 
 /**
  *
  * @author XanderH11
  */
 public class Lobby extends Place {
-    ArrayList<Table> tables = new ArrayList<Table>();
+    public ArrayList<Table> tables = new ArrayList<Table>();
     ArrayList<String> players;// = new ArrayList<Player>();
-    ArrayList<Table> freeTables = new ArrayList<Table>();
+    public ArrayList<Table> freeTables = new ArrayList<Table>();
 //    ArrayList<Table> playingTables = new ArrayList<Table>();
     LobbyPanel frontend;
     
     public Lobby(){
         super();
         Hashtable<Integer, Table> hash = new Hashtable();
+        for(int i=-1; i< 9; i++){
+            Table element = new Table(i);
+            tables.add(element);
+            freeTables.add(element);
+            hash.put(i, element);
+        }
         // fill preexisting tables before building panel
         frontend = new LobbyPanel(hash, this);
 		//TODO get list of players from the server? to display for people to select for private chats?
@@ -33,7 +40,10 @@ public class Lobby extends Place {
         for(int i=0; i < freeTables.size(); i++){
             if(freeTables.get(i).getID() == table){
                 //TODO make request
-                freeTables.get(i).requestToPlay();
+                TablePanel response = freeTables.get(i).requestToPlay();
+                if (response != null) {
+                    response.setVisible(true);
+                }
                 return true;
             }else{
                 
@@ -52,9 +62,8 @@ public class Lobby extends Place {
         return false;//this should never happen
     }
     
-    public boolean createTable(){
-		//TODO make table create id and pass that to join?
-        int newID = tables.size();
+    public boolean createTable(int newID){
+		
         Table newTable = new Table(newID);
         tables.add(newTable);
         freeTables.add(newTable);

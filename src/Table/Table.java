@@ -39,16 +39,14 @@ public class Table extends Place {
 //        }
 //    }
 	
-	public boolean requestToPlay(){
+	public TablePanel requestToPlay(){
         if(activePlayers.size() < 2){
             activePlayers.add(activePlayers.size()+1);
             frontend.setVisible(true);
             readyToPlay();
-            return true;
+            return frontend;
         }
-        else{
-            return false;
-        }
+        return null;
     }
     
     public boolean requestToObserve(){

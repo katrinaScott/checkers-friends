@@ -22,6 +22,7 @@ public class LobbyPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Hashtable<Integer, Table> tables;
 	Lobby backend;
+        private JPanel tablePane;
 	/*
 	 * 
 	 */
@@ -36,7 +37,7 @@ public class LobbyPanel extends JPanel {
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
-		JPanel tablePane = new JPanel();
+		tablePane = new JPanel();
 		tablePane.setBackground(Color.DARK_GRAY);
 		
 		tablePane.setLayout(new BoxLayout(tablePane, BoxLayout.Y_AXIS));
@@ -97,7 +98,7 @@ public class LobbyPanel extends JPanel {
 		table.setForeground(Color.WHITE);
 		tablePanel.add(table);
 		
-		backend.createTable();////
+		backend.createTable(number);////
 		
 		// if applicable, create join button
 		JButton joinButton = new JButton("Join");
@@ -134,7 +135,8 @@ public class LobbyPanel extends JPanel {
 			}
 		});
 		tablePanel.add(watchButton);
-		
+		tablePanel.setVisible(true);////
+                tablePane.add(tablePanel);
 		return tablePanel;
 	} // end method addTable
 	
@@ -145,6 +147,7 @@ public class LobbyPanel extends JPanel {
 	private void createNewTable() {
 		
 		//add table to db
+            addTable(backend.tables.size()+1);
 		
 	} // end method createNewTable
 	
