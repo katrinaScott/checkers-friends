@@ -17,6 +17,8 @@ public class Table extends Place {
     int tableID;
     ArrayList<Integer> activePlayers = new ArrayList<Integer>();
     ArrayList<Integer> observers = new ArrayList<Integer>();
+    private String username = "Temp";
+    private String opponent = "Temp";
     boolean active = false;
     Board gameboard;
     TablePanel frontend;
@@ -80,6 +82,18 @@ public class Table extends Place {
         gameboard = new Board();
         MakeBoard mb = new MakeBoard();
         mb.generateBoard(gameboard, frontend.boardPanel);
+    }
+    
+    public TablePanel getTablePanel() {
+    	return this.frontend;
+    }
+    
+    public String getUsername() {
+    	return this.username;
+    }
+    
+    public String getOpponent() {
+    	return this.opponent;
     }
         
 }
