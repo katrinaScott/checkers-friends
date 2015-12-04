@@ -2,6 +2,7 @@ package src.Communications;
 
 import src.Communications.Interfaces.CheckersClient;
 import src.Table.Lobby;
+import src.Table.Table;
 import src.UI.MainFrame;
 import src.UI.LoginPopup;
 
@@ -10,6 +11,7 @@ import java.util.Hashtable;
 
 import javax.swing.JOptionPane;
 
+import src.Board.ServerBoardView;
 import src.Chat.PrivateChat;
 import src.Chat.PublicChat;
 
@@ -71,7 +73,7 @@ public class Client extends Thread implements CheckersClient {
 	//notice that you are now in the game lobby.
 	public void youInLobby(){
 		
-		//lobby.add();
+		lobby.add(clientName);
 		chat.appendServerMessage("You have joined the lobby.\n");
 		
 	}
@@ -79,7 +81,7 @@ public class Client extends Thread implements CheckersClient {
 	//notice that you have left the lobby.
 	public void youLeftLobby(){
 		
-		//lobby.remove();
+		lobby.remove(clientName);
 		
 	}
 	
@@ -193,6 +195,13 @@ public class Client extends Thread implements CheckersClient {
 	 */
 	public void curBoardState(int tid, byte[][] boardState) {
 		
+		Table currentTable = new Table(tid);
+        currentTable.setBoard();
+        ServerBoardView serverBoard = new ServerBoardView();
+        serverBoard.setBoardState(boardState);
+        //make move?
+        //send server message with new state?
+        
 	}
 	
 	//notice that for the game you are playing, you win!

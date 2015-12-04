@@ -79,7 +79,6 @@ public class TablePanel extends JPanel {
 		boardLayout.putConstraint(SpringLayout.SOUTH, username, -22, SpringLayout.NORTH, help);
 		boardPanel.add(username);
 		
-		// ugh fuck i forgot i used SpringLayout so this isn't even showing up because fuck SpringLayout
 		JLabel opponent = new JLabel(backend.getOpponent());
 		boardLayout.putConstraint(SpringLayout.NORTH, opponent, 10, SpringLayout.NORTH, boardPanel);
 		boardLayout.putConstraint(SpringLayout.WEST, opponent, 0, SpringLayout.WEST, help);
@@ -132,6 +131,7 @@ public class TablePanel extends JPanel {
         panel.add(board);
 		
 		boardPanel.add(panel);
+		setVisible(true);
 		
 		JTabbedPane chat = new JTabbedPane();
 		JPanel lobbyChat = new PublicChat();

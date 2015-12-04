@@ -102,8 +102,9 @@ public class LobbyPanel extends JPanel {
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
 		tablePanel.setBackground(Color.DARK_GRAY);
+		number++;
 		
-		JLabel table = new JLabel("Table " + (number+1) + "         ");
+		JLabel table = new JLabel("Table " + number + "         ");
 		table.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
 
 		table.setForeground(Color.WHITE);
