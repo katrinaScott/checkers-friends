@@ -7,6 +7,7 @@ package src.Table;
 
 import src.UI.TablePanel;
 import java.util.ArrayList;
+import javax.swing.JFrame;
 import src.Board.*;
 
 /**
@@ -20,6 +21,7 @@ public class Table extends Place {
     boolean active = false;
     Board gameboard;
     TablePanel frontend;
+    JFrame frame = new JFrame();
     
     public Table(int ID){
         super();
@@ -42,7 +44,10 @@ public class Table extends Place {
 	public TablePanel requestToPlay(){
         if(activePlayers.size() < 2){
             activePlayers.add(activePlayers.size()+1);
+            frame.add(frontend);
             frontend.setVisible(true);
+            frame.pack();
+            frame.setVisible(true);
             readyToPlay();
             return frontend;
         }

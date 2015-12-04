@@ -41,9 +41,9 @@ public class Lobby extends Place {
             if(freeTables.get(i).getID() == table){
                 //TODO make request
                 TablePanel response = freeTables.get(i).requestToPlay();
-                if (response != null) {
-                    response.setVisible(true);
-                }
+//                if (response != null) {
+//                    response.setVisible(true);
+//                }
                 return true;
             }else{
                 
@@ -62,12 +62,15 @@ public class Lobby extends Place {
         return false;//this should never happen
     }
     
-    public boolean createTable(int newID){
-		
-        Table newTable = new Table(newID);
-        tables.add(newTable);
-        freeTables.add(newTable);
-        joinTable(newID);
+    public boolean createTable(int newID, int join){
+        if(newID > tables.size()) {
+            Table newTable = new Table(newID);
+            tables.add(newTable);
+            freeTables.add(newTable);
+        }
+        if (join == 1){
+            joinTable(newID);
+        }
         return true;
     }
     
@@ -93,6 +96,6 @@ public class Lobby extends Place {
     }
     
     public void addTable(int tid) {
-    	frontend.addTable(tid);
+    	frontend.addTable(tid, 0);
     }
 }

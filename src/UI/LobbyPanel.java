@@ -43,7 +43,7 @@ public class LobbyPanel extends JPanel {
 		tablePane.setLayout(new BoxLayout(tablePane, BoxLayout.Y_AXIS));
 		// for each table in database
 		for(int i = 0; i < tables.size(); i++) {
-			JPanel table = addTable(i+1);
+			JPanel table = addTable(i+1, 0);
 			tablePane.add(table);
 		}
 		
@@ -88,7 +88,7 @@ public class LobbyPanel extends JPanel {
 	 * 
 	 */
 	
-	public JPanel addTable(int number) {
+	public JPanel addTable(int number, int join) {
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
@@ -98,7 +98,7 @@ public class LobbyPanel extends JPanel {
 		table.setForeground(Color.WHITE);
 		tablePanel.add(table);
 		
-		backend.createTable(number);////
+		backend.createTable(number, join);////
 		
 		// if applicable, create join button
 		JButton joinButton = new JButton("Join");
@@ -147,7 +147,7 @@ public class LobbyPanel extends JPanel {
 	private void createNewTable() {
 		
 		//add table to db
-            addTable(backend.tables.size()+1);
+            addTable(backend.tables.size()+1, 1);
 		
 	} // end method createNewTable
 	
