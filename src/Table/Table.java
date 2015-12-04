@@ -26,7 +26,7 @@ public class Table extends Place {
     private String username = "Temp User";
     private String opponent = "Temp Opponent";
     boolean active = false;
-    Board gameboard;
+    Board gameboard = new Board();
     TablePanel frontend;
     private static JFrame frame = new JFrame();
     
@@ -66,6 +66,7 @@ public class Table extends Place {
     
     public boolean requestToObserve(){
         observers.add(observers.size()+1);
+        setBoard();
         frame.add(frontend);
         frontend.setVisible(true);
         frame.pack();
@@ -95,7 +96,6 @@ public class Table extends Place {
     }
     
     public void setBoard(){
-        gameboard = new Board();
         MakeBoard mb = new MakeBoard();
         mb.generateBoard(gameboard, frontend.boardPanel);
     }

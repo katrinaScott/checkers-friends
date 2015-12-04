@@ -130,9 +130,7 @@ public class LobbyPanel extends JPanel {
 			public void actionPerformed(ActionEvent watch) {
 				// join table as observer
                             JButton b = (JButton) watch.getSource();
-                            System.out.println("before");
                             int num = Character.getNumericValue(b.getName().charAt(0));
-                            System.out.println("after");
                             backend.observeTable(num);////
 			}
 		});
