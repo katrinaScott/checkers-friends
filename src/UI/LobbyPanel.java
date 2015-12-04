@@ -120,7 +120,7 @@ public class LobbyPanel extends JPanel {
 		
 		// create watch button
 		JButton watchButton = new JButton("Watch");
-		joinButton.setName("" + number);
+		watchButton.setName("" + number);
                 //joinButton.setText("Watch");//if the button shows up with a number instead of a word, uncomment this
 		watchButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 10));
 		watchButton.setForeground(Color.WHITE);
@@ -130,9 +130,7 @@ public class LobbyPanel extends JPanel {
 			public void actionPerformed(ActionEvent watch) {
 				// join table as observer
                             JButton b = (JButton) watch.getSource();
-                            System.out.println("before");
                             int num = Character.getNumericValue(b.getName().charAt(0));
-                            System.out.println("after");
                             backend.observeTable(num);////
 			}
 		});
