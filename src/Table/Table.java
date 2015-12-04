@@ -21,7 +21,7 @@ public class Table extends Place {
     Board gameboard;
     TablePanel frontend;
     
-    Table(int ID){
+    public Table(int ID){
         super();
         tableID = ID;
         frontend = new TablePanel(this);

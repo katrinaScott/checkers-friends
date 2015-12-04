@@ -24,7 +24,7 @@ public class PublicChat extends JPanel implements Chat {
 	JTextArea chatArea;
 	JTextField input;
 	JButton sendButton;
-	String userName;
+	String userName = "wrong";
 	Hashtable<String, Color> userColors;
 	
 	public PublicChat() {
@@ -66,6 +66,9 @@ public class PublicChat extends JPanel implements Chat {
 	
 	private void getInput() {
 		// TODO Auto-generated method stub
+		String userInput = input.getText();
+		appendUserMessage(getUserName(), userInput);
+		input.setText("");
 
 	}
 
@@ -83,6 +86,10 @@ public class PublicChat extends JPanel implements Chat {
 	}
 	
 	public void appendServerMessage(String msg) {
+		
+		if (msg.charAt(msg.length() - 1) != '\n') {
+			msg += "\n";
+		}
 		
 		String newLine = msg;
 		//display italics and grey
