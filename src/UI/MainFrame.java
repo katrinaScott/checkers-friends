@@ -67,14 +67,14 @@ public class MainFrame extends JFrame {
 		setVisible(true);
 		
 		// start temp code
-		remove(title);
-		Table table = new Table(0);
-		add(table.getTablePanel());
-		revalidate();
+		//remove(title);
+		//Table table = new Table(0);
+		//add(table.getTablePanel());
+		//revalidate();
 		// end temp code
 		
-		// uncomment to get lobby back
-		/*
+		// comment out below and uncomment temp code above to replace lobby with table
+		
 		lobby = new Lobby();
 		lobbyPanel = lobby.getLobbyPanel();
 		
@@ -91,7 +91,7 @@ public class MainFrame extends JFrame {
 		};
 		pause = new Timer(3000, wait);
 		pause.start();
-		*/
+		
 	} // end constructor
 	
 	/*

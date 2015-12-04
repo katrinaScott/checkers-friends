@@ -20,7 +20,7 @@ public class PrivateChat extends JPanel implements Chat {
 	JTextArea chatArea;
 	JTextField input;
 	JButton sendButton;
-	String userName = "wrong";
+	String userName = "Temp Username";
 	String otherUser;
 	
 	public PrivateChat(String other) {

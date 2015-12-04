@@ -24,7 +24,7 @@ public class PublicChat extends JPanel implements Chat {
 	JTextArea chatArea;
 	JTextField input;
 	JButton sendButton;
-	String userName = "wrong";
+	String userName = "Temp Username";
 	Hashtable<String, Color> userColors;
 	
 	public PublicChat() {
