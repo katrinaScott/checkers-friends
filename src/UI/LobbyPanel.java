@@ -38,10 +38,18 @@ public class LobbyPanel extends JPanel {
 		setBackground(Color.DARK_GRAY);
 		setLayout(new BorderLayout(0, 0));
 		
+		JLabel tableHeader = new JLabel("TABLES:");
+		tableHeader.setForeground(Color.WHITE);
+		tableHeader.setFont(new Font("DejaVu Sans", Font.BOLD, 50));
+		tableHeader.setBackground(Color.DARK_GRAY);
+		
 		tablePane = new JPanel();
 		tablePane.setBackground(Color.DARK_GRAY);
 		
 		tablePane.setLayout(new BoxLayout(tablePane, BoxLayout.Y_AXIS));
+		
+		tablePane.add(tableHeader);
+		
 		// for each table in database
 		for(int i = 0; i < tables.size(); i++) {
 			JPanel table = addTable(i, 0);
@@ -93,9 +101,11 @@ public class LobbyPanel extends JPanel {
 		
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.X_AXIS));
+		tablePanel.setBackground(Color.DARK_GRAY);
 		
-		JLabel table = new JLabel("Table " + (number+1));
-		table.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
+		JLabel table = new JLabel("Table " + (number+1) + "         ");
+		table.setFont(new Font("DejaVu Sans", Font.PLAIN, 20));
+
 		table.setForeground(Color.WHITE);
 		tablePanel.add(table);
                 
@@ -106,7 +116,7 @@ public class LobbyPanel extends JPanel {
                 joinButton.setName("" + number);
                 //joinButton.setText("Join");//if the button shows up with a number instead of a word, uncomment this
 		joinButton.setBackground(Color.GRAY);
-		joinButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 10));
+		joinButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		joinButton.setForeground(Color.WHITE);
 		joinButton.addActionListener(new ActionListener() {
 			@Override
@@ -124,7 +134,7 @@ public class LobbyPanel extends JPanel {
 		JButton watchButton = new JButton("Watch");
 		watchButton.setName("" + number);
                 //joinButton.setText("Watch");//if the button shows up with a number instead of a word, uncomment this
-		watchButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 10));
+		watchButton.setFont(new Font("DejaVu Sans", Font.PLAIN, 15));
 		watchButton.setForeground(Color.WHITE);
 		watchButton.setBackground(Color.GRAY);
 		watchButton.addActionListener(new ActionListener() {
@@ -139,7 +149,7 @@ public class LobbyPanel extends JPanel {
 		});
 		tablePanel.add(watchButton);
 		tablePanel.setVisible(true);////
-                tablePane.add(tablePanel);
+                //tablePane.add(tablePanel);
 		return tablePanel;
 	} // end method addTable
 	
